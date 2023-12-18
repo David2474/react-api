@@ -1,10 +1,16 @@
+import '../sass/Button.scss'
 
 
 
-export const Button = (props) => {
+export const Button = ({icon, handelClick}) => {
     return( 
-        <>
-        <button>{props.text}</button>
-        </>
+        <div className='btn-box'>
+            <button 
+                className="btn"
+                onClick={handelClick}
+            >{icon}
+            </button>
+            <div className='btn-shadow'></div>
+        </div>
     )
 };

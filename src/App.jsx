@@ -1,41 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
+import './sass/App.scss'
+import { Card } from "./components/Card";
+import { Button } from './components/Button';
+import { TiArrowLeftOutline } from "react-icons/ti";
+import { TiArrowRightOutline } from "react-icons/ti";
 
 const App = () => {
 
 
-    const [pokemonNumber, setPokemonNumber] = useState(1);
-    const [pokemonName, setPokemonName] = useState('');
+    const [pokemonId, setPokemonId] = useState(1);
 
-
-    function sumary() {
-        setPokemonNumber(pokemonNumber +1);
+    function sumaryId (){
+            setPokemonId(pokemonId + 1)
     }
 
-    useEffect(()=>{
-        // llamados a la api
-        // fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}/`)
-        // .then(response=>response.json())
-        // .then(data=>setPokemonName(data.name))
-
-
-        serchPokemon(pokemonNumber)
-
-
-    }, [pokemonNumber])
-
-    const serchPokemon = async () => {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}/`)
-        const data = await response.json()
-        setPokemonName(data.name)
+    function restId (){
+            (pokemonId == 1) ?
+            setPokemonId(1):
+            setPokemonId(pokemonId - 1)
     }
-    
+
 
     return(
         <>
-        <h1>value: {pokemonNumber} -- {pokemonName}</h1>
-        <button
-        onClick={sumary}
-        >+1</button>
+            <div>
+                <Card/>
+            </div>
+            <div className='button-container'>
+                <Button 
+                    icon={<TiArrowLeftOutline />}
+                    handelClick={restId} 
+                />
+                <p>{pokemonId}</p>
+                <Button 
+                    icon={<TiArrowRightOutline />} 
+                    handelClick={sumaryId}
+                />
+            </div>
         </>
     )
 };
